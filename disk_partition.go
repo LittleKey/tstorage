@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/nakabonne/tstorage/internal/syscall"
+	"github.com/littlekey/tstorage/internal/syscall"
 )
 
 const (
@@ -18,9 +18,7 @@ const (
 	metaFileName = "meta.json"
 )
 
-var (
-	errInvalidPartition = errors.New("invalid partition")
-)
+var errInvalidPartition = errors.New("invalid partition")
 
 // A disk partition implements a partition that uses local disk as a storage.
 // It mainly has two files, data file and meta file.

@@ -1,4 +1,4 @@
-# tstorage [![Go Reference](https://pkg.go.dev/badge/mod/github.com/nakabonne/tstorage.svg)](https://pkg.go.dev/mod/github.com/nakabonne/tstorage)
+# tstorage [![Go Reference](https://pkg.go.dev/badge/mod/github.com/littlekey/tstorage.svg)](https://pkg.go.dev/mod/github.com/littlekey/tstorage)
 
 `tstorage` is a lightweight local on-disk storage engine for time-series data with a straightforward API.
 Especially ingestion is massively optimized as it provides goroutine safe capabilities of write into and read from TSDB that partitions data points by time.
@@ -22,7 +22,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/nakabonne/tstorage"
+	"github.com/littlekey/tstorage"
 )
 
 func main() {
@@ -75,7 +75,7 @@ _ = storage.InsertRows([]tstorage.Row{
 points, _ := storage.Select(metric, labels, 1600000000, 1600000001)
 ```
 
-For more examples see [the documentation](https://pkg.go.dev/github.com/nakabonne/tstorage#pkg-examples).
+For more examples see [the documentation](https://pkg.go.dev/github.com/littlekey/tstorage#pkg-examples).
 
 ## Benchmarks
 Benchmark tests were made using Intel(R) Core(TM) i7-8559U CPU @ 2.70GHz with 16GB of RAM on macOS 10.15.7
@@ -87,13 +87,13 @@ go version go1.16.2 darwin/amd64
 $ go test -benchtime=4s -benchmem -bench=. .
 goos: darwin
 goarch: amd64
-pkg: github.com/nakabonne/tstorage
+pkg: github.com/littlekey/tstorage
 cpu: Intel(R) Core(TM) i7-8559U CPU @ 2.70GHz
 BenchmarkStorage_InsertRows-8                  	14135685	       305.9 ns/op	     174 B/op	       2 allocs/op
 BenchmarkStorage_SelectAmongThousandPoints-8   	20548806	       222.4 ns/op	      56 B/op	       2 allocs/op
 BenchmarkStorage_SelectAmongMillionPoints-8    	16185709	       292.2 ns/op	      56 B/op	       1 allocs/op
 PASS
-ok  	github.com/nakabonne/tstorage	16.501s
+ok  	github.com/littlekey/tstorage	16.501s
 ```
 
 ## Internal
@@ -137,7 +137,7 @@ It stores data points in an ordered Slice, which offers excellent cache hit rati
 All incoming data is written to a write-ahead log (WAL) right before inserting into a memory partition to prevent data loss.
 
 ### Disk partition
-The old memory partitions get compacted and persisted to the directory prefixed with `p-`, under the directory specified with the [WithDataPath](https://pkg.go.dev/github.com/nakabonne/tstorage#WithDataPath) option.
+The old memory partitions get compacted and persisted to the directory prefixed with `p-`, under the directory specified with the [WithDataPath](https://pkg.go.dev/github.com/littlekey/tstorage#WithDataPath) option.
 Here is the macro layout of disk partitions:
 
 ```

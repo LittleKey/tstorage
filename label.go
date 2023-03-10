@@ -3,7 +3,7 @@ package tstorage
 import (
 	"sort"
 
-	"github.com/nakabonne/tstorage/internal/encoding"
+	"github.com/littlekey/tstorage/internal/encoding"
 )
 
 const (
